@@ -24,6 +24,8 @@ class App extends React.Component {
       userAddInput: "",
 
       userSearchInput: "",
+
+      searchList: [],
     }
 
   }
@@ -77,15 +79,20 @@ class App extends React.Component {
 
   changeSearchInput(input) {
     this.setState({ userSearchInput: input });
+  };
 
+  searchInTodoList(input) {
     const listArray = this.state.todoList;
-    
-    const searchedItem = listArray.filter(val => 
+
+    const searchedItem = listArray.filter(val =>
       val.task.toLocaleLowerCase().indexOf(input.toLocaleLowerCase())
       !== -1);
 
-      this.setState({todoList: searchedItem})
-  };
+    this.setState({
+      searchList: searchedItem,
+      userSearchInput: ""
+    })
+  }
 
   render() {
     return (
@@ -104,7 +111,9 @@ class App extends React.Component {
         <SearchItem
           searchInput={this.state.userSearchInput}
           handleSearch={(event) => this.changeSearchInput(event.target.value)}
+          searchTheElement={() => this.searchInTodoList(this.state.userSearchInput)}
         />
+        <ul>{this.state.searchList.map(val => <li>{val.task}</li>)}</ul>
       </div>
     );
   }
