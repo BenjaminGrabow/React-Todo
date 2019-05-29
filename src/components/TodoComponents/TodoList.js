@@ -9,6 +9,7 @@ const TodoList = props => {
                                 <Todo
                                         key={todoMapValue.id}
                                         listClass={todoMapValue.completed}
+                                        changeToFinished={props.handleFinish}
                                 >{todoMapValue.task}</Todo>
                         ))}
                 </div>

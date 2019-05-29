@@ -1,9 +1,10 @@
 import React from 'react';
 
 const Todo = props => {
-        return(
+        return (
                 <div
-                className={props.listClass}
+                        className={props.listClass}
+                        onClick={props.changeToFinished}
                 >{props.children}</div>
         )
 }
