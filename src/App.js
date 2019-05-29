@@ -81,11 +81,10 @@ class App extends React.Component {
     const listArray = this.state.todoList;
     
     const searchedItem = listArray.filter(val => 
-      val.task.toLocaleLowerCase() === input.toLocaleLowerCase());
+      val.task.toLocaleLowerCase().indexOf(input.toLocaleLowerCase())
+      !== -1);
 
       this.setState({todoList: searchedItem})
-
-      
   };
 
   render() {
