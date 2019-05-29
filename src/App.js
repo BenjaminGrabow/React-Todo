@@ -20,7 +20,9 @@ class App extends React.Component {
           completed: "false"
         }
       ],
+
       userAddInput: "",
+
       userSearchInput: "",
     }
 
@@ -31,20 +33,20 @@ class App extends React.Component {
   };
 
   addItemToList(userAddInput) {
-    
-   const newTask = {
-       task: userAddInput,
-       id: Date.now(),
-       completed: 'false'
-     }
 
-   const newFriendList = this.state.todoList.concat(newTask);;
-   
+    const newTask = {
+      task: userAddInput,
+      id: Date.now(),
+      completed: 'false'
+    }
+
+    const newFriendList = this.state.todoList.concat(newTask);
+
     this.setState({
       todoList: newFriendList,
       userAddInput: ""
-    });
-  }
+    })
+  };
 
   makeItemCompleted(target) {
 
@@ -58,25 +60,33 @@ class App extends React.Component {
     this.setState({
       todoList: listArray
     })
-  }
-
- clearAllCompletedElements() {
-    let listArray = this.state.todoList;
-
-   const filterCompletedListItems = listArray.filter(value =>
-      value.completed === "true");
-     
-      filterCompletedListItems.map(val => val.completed = "deleted");
-
-      this.setState({
-        todoList: listArray
-      })
   };
 
-  changeUserSearchInput(inputFromTheSearchInput) {
-    this.setState({ userSearchInput: inputFromTheSearchInput })
+  clearAllCompletedElements() {
+    let listArray = this.state.todoList;
 
-  }
+    const filterCompletedListItems = listArray.filter(value =>
+      value.completed === "true");
+
+    filterCompletedListItems.map(val => val.completed = "deleted");
+
+    this.setState({
+      todoList: listArray
+    })
+  };
+
+  changeSearchInput(input) {
+    this.setState({ userSearchInput: input });
+
+    const listArray = this.state.todoList;
+    
+    const searchedItem = listArray.filter(val => 
+      val.task.toLocaleLowerCase() === input.toLocaleLowerCase());
+
+      this.setState({todoList: searchedItem})
+
+      
+  };
 
   render() {
     return (
@@ -90,9 +100,12 @@ class App extends React.Component {
           handleUserInput={(event) => this.changeUserInput(event.target.value)}
           handleTheAddedItem={() => this.addItemToList(this.state.userAddInput)}
           handleClearButton={() => this.clearAllCompletedElements()}
-          >
+        >
         </TodoForm>
-        <SearchItem  searchInput={this.state.userSearchInput} handleSearch={event => this.changeUserSeachInput(event.target.value)} />
+        <SearchItem
+          searchInput={this.state.userSearchInput}
+          handleSearch={(event) => this.changeSearchInput(event.target.value)}
+        />
       </div>
     );
   }
