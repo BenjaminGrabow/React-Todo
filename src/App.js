@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from "./components/TodoComponents/TodoList";
+import TodoForm from "./components/TodoComponents/TodoForm";
 
 class App extends React.Component {
  constructor(props) {
@@ -18,6 +19,7 @@ class App extends React.Component {
         completed: "false"
       }
     ],
+    userAddInput: ""
     
    }
  }
@@ -27,6 +29,12 @@ class App extends React.Component {
         <TodoList
           todoFromState={this.state.todoList}
         />
+        <TodoForm
+          handleUserInput={(event) => this.changeUserInput(event.target.value)}
+          input={this.state.userAddInput}
+          handleTheAddedItem={() => this.addItemToList(this.state.userInput)}
+          handleClearButton={() => this.clearAllCompletedElements()}>
+        </TodoForm>
       </div>
     );
   }
