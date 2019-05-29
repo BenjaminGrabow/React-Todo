@@ -44,14 +44,14 @@ class App extends React.Component {
     });
   }
 
-  makeItemFinish(target) {
+  makeItemCompleted(target) {
 
     let listArray = this.state.todoList;
 
-    const x = listArray.filter(value =>
+    const filteredListItem = listArray.filter(value =>
       value.task === target);
 
-    x.map(val => val.completed = "true")
+    filteredListItem.map(val => val.completed = "true")
 
     this.setState({
       todoList: listArray
@@ -61,10 +61,10 @@ class App extends React.Component {
  clearAllCompletedElements() {
     let listArray = this.state.todoList;
 
-   const x = listArray.filter(value =>
+   const filterCompletedListItems = listArray.filter(value =>
       value.completed === "true");
      
-      x.map(val => val.completed = "deleted");
+      filterCompletedListItems.map(val => val.completed = "deleted");
 
       this.setState({
         todoList: listArray
@@ -76,7 +76,7 @@ class App extends React.Component {
       <div>
         <TodoList
           todoFromState={this.state.todoList}
-          handleFinish={(event) => this.makeItemFinish(event.target.textContent)}
+          handleFinish={(event) => this.makeItemCompleted(event.target.textContent)}
         />
         <TodoForm
           input={this.state.userAddInput}
