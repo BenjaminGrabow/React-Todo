@@ -24,23 +24,22 @@ class App extends React.Component {
 
   }
 
-  changeUserInput(inputFromTheInputElement) {
-    this.setState({ userAddInput: inputFromTheInputElement })
+  changeUserInput(inputFromTheAddInputElement) {
+    this.setState({ userAddInput: inputFromTheAddInputElement })
   };
 
-  addItemToList(input) {
+  addItemToList(userAddInput) {
+    
+   const newTask = {
+       task: userAddInput,
+       id: Date.now(),
+       completed: 'false'
+     }
 
-    let listArray = this.state.todoList;
-    input = {
-      task: input,
-      id: Date.now(),
-      completed: 'false'
-    }
-
-    listArray.push(input);
-
+   const newFriendList = this.state.todoList.concat(newTask);;
+   
     this.setState({
-      todoList: listArray,
+      todoList: newFriendList,
       userAddInput: ""
     });
   }
