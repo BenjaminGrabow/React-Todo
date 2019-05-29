@@ -111,12 +111,14 @@ class App extends React.Component {
         >
         </TodoForm>
         <h2>Search your Todo's here </h2>
+        <div className="search">
         <SearchItem
           searchInput={this.state.userSearchInput}
           handleSearch={(event) => this.changeSearchInput(event.target.value)}
           searchTheElement={() => this.searchInTodoList(this.state.userSearchInput)}
         />
         <ul>{this.state.searchList.map(val => <li className="search-items">{val.task}</li>)}</ul>
+        </div>
       </div>
     );
   }

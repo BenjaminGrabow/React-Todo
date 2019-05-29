@@ -3,10 +3,10 @@ import "./Todo.css";
 
 const Todo = props => {
         return (
-                <div
+                <li
                         className={props.listClass}
                         onClick={props.changeToFinished}
-                >{props.children}</div>
+                >{props.children}</li>
         )
 }
 

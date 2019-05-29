@@ -4,7 +4,7 @@ import Todo from "./Todo";
 
 const TodoList = props => {
         return (
-                <div>
+                <ul>
                         {props.todoFromState.map(todoMapValue => (
                                 <Todo
                                         key={todoMapValue.id}
@@ -12,7 +12,7 @@ const TodoList = props => {
                                         changeToFinished={props.handleFinish}
                                 >{todoMapValue.task}</Todo>
                         ))}
-                </div>
+                </ul>
         );
 };
 
