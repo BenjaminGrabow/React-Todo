@@ -44,18 +44,45 @@ class App extends React.Component {
     });
   }
 
+  makeItemFinish(target) {
+
+    let listArray = this.state.todoList;
+
+    const x = listArray.filter(value =>
+      value.task === target);
+
+    x.map(val => val.completed = "true")
+
+    this.setState({
+      todoList: listArray
+    })
+  }
+
+ clearAllCompletedElements() {
+    let listArray = this.state.todoList;
+
+   const x = listArray.filter(value =>
+      value.completed === "true");
+     
+      x.map(val => val.completed = "deleted");
+
+      this.setState({
+        todoList: listArray
+      })
+  };
+
   render() {
     return (
       <div>
         <TodoList
           todoFromState={this.state.todoList}
-          // handleFinish={(event) => this.makeItemFinish(event.target.textContent)}
+          handleFinish={(event) => this.makeItemFinish(event.target.textContent)}
         />
         <TodoForm
           input={this.state.userAddInput}
           handleUserInput={(event) => this.changeUserInput(event.target.value)}
           handleTheAddedItem={() => this.addItemToList(this.state.userAddInput)}
-          // handleClearButton={() => this.clearAllCompletedElements()}
+          handleClearButton={() => this.clearAllCompletedElements()}
           >
         </TodoForm>
       </div>
