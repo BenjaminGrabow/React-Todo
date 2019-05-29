@@ -31,11 +31,11 @@ class App extends React.Component {
 
   }
 
-  changeUserInput(inputFromTheAddInputElement) {
+ changeUserInput = (inputFromTheAddInputElement) => {
     this.setState({ userAddInput: inputFromTheAddInputElement })
   };
 
-  addItemToList(userAddInput) {
+  addItemToList = (userAddInput) => {
 
     const newTask = {
       task: userAddInput,
@@ -51,7 +51,7 @@ class App extends React.Component {
     })
   };
 
-  makeItemCompleted(target) {
+  makeItemCompleted = (target) => {
 
     let listArray = this.state.todoList;
 
@@ -65,7 +65,7 @@ class App extends React.Component {
     })
   };
 
-  clearAllCompletedElements() {
+  clearAllCompletedElements = () => {
     let listArray = this.state.todoList;
 
     const filterCompletedListItems = listArray.filter(value =>
@@ -78,11 +78,11 @@ class App extends React.Component {
     })
   };
 
-  changeSearchInput(input) {
+  changeSearchInput = (input) => {
     this.setState({ userSearchInput: input });
   };
 
-  searchInTodoList(input) {
+  searchInTodoList = (input) => {
     const listArray = this.state.todoList;
 
     const searchedItem = listArray.filter(val =>
