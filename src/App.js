@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
+import SearchItem from "./components/TodoComponents/SearchItem";
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class App extends React.Component {
           completed: "false"
         }
       ],
-      userAddInput: ""
+      userAddInput: "",
+      userSearchInput: "",
     }
 
   }
@@ -71,6 +73,11 @@ class App extends React.Component {
       })
   };
 
+  changeUserSearchInput(inputFromTheSearchInput) {
+    this.setState({ userSearchInput: inputFromTheSearchInput })
+
+  }
+
   render() {
     return (
       <div>
@@ -85,6 +92,7 @@ class App extends React.Component {
           handleClearButton={() => this.clearAllCompletedElements()}
           >
         </TodoForm>
+        <SearchItem  searchInput={this.state.userSearchInput} handleSearch={event => this.changeUserSeachInput(event.target.value)} />
       </div>
     );
   }
