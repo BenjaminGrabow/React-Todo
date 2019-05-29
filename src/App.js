@@ -69,12 +69,10 @@ class App extends React.Component {
     let listArray = this.state.todoList;
 
     const filterCompletedListItems = listArray.filter(value =>
-      value.completed === "true");
-
-    filterCompletedListItems.map(val => val.completed = "deleted");
+      value.completed !== "true");
 
     this.setState({
-      todoList: listArray
+      todoList: filterCompletedListItems
     })
   };
 
@@ -86,8 +84,7 @@ class App extends React.Component {
     const listArray = this.state.todoList;
 
     const searchedItem = listArray.filter(val =>
-      val.task.toLocaleLowerCase().indexOf(input.toLocaleLowerCase())
-      !== -1);
+      val.task.toLocaleLowerCase() === input.toLocaleLowerCase());
 
     this.setState({
       searchList: searchedItem,
@@ -117,7 +114,9 @@ class App extends React.Component {
           handleSearch={(event) => this.changeSearchInput(event.target.value)}
           searchTheElement={() => this.searchInTodoList(this.state.userSearchInput)}
         />
-        <ul>{this.state.searchList.map(val => <li className="search-items">{val.task}</li>)}</ul>
+        <ul>
+        {this.state.searchList.map(val => <li className="search-items">{val.task}</li>)}
+        </ul>
         </div>
       </div>
     );
