@@ -1,4 +1,5 @@
 import React from 'react';
+import "./components/TodoComponents/App.css";
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
 import SearchItem from "./components/TodoComponents/SearchItem";
@@ -96,7 +97,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
+        <h1>Your Todo List</h1>
         <TodoList
           todoFromState={this.state.todoList}
           handleFinish={(event) => this.makeItemCompleted(event.target.textContent)}
@@ -108,12 +110,13 @@ class App extends React.Component {
           handleClearButton={() => this.clearAllCompletedElements()}
         >
         </TodoForm>
+        <h2>Search your Todo's here </h2>
         <SearchItem
           searchInput={this.state.userSearchInput}
           handleSearch={(event) => this.changeSearchInput(event.target.value)}
           searchTheElement={() => this.searchInTodoList(this.state.userSearchInput)}
         />
-        <ul>{this.state.searchList.map(val => <li>{val.task}</li>)}</ul>
+        <ul>{this.state.searchList.map(val => <li className="search-items">{val.task}</li>)}</ul>
       </div>
     );
   }
