@@ -84,7 +84,7 @@ class App extends React.Component {
     const listArray = this.state.todoList;
 
     const searchedItem = listArray.filter(val =>
-      val.task.toLocaleLowerCase() === input.toLocaleLowerCase());
+      val.task.toLocaleLowerCase().startsWith(input.toLocaleLowerCase()));
 
     this.setState({
       searchList: searchedItem,
@@ -115,7 +115,10 @@ class App extends React.Component {
           searchTheElement={() => this.searchInTodoList(this.state.userSearchInput)}
         />
         <ul>
-        {this.state.searchList.map(val => <li className="search-items">{val.task}</li>)}
+        {this.state.searchList.map(val => <li
+         className="search-items">
+         {val.task}
+         </li>)}
         </ul>
         </div>
       </div>
