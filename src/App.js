@@ -127,6 +127,7 @@ class App extends React.Component {
           />
           <ul>
             {this.state.searchList.map(val => <li
+              key={Date.now()}
               className="search-items">
               {val.task}
             </li>)}
