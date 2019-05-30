@@ -31,7 +31,14 @@ class App extends React.Component {
 
   }
 
- changeUserInput = (inputFromTheAddInputElement) => {
+  componentWillMount() {
+    localStorage.getItem('todoList') && this.setState({
+      todoList: JSON.parse(localStorage.getItem('todoList'))
+    })
+
+  }
+
+  changeUserInput = (inputFromTheAddInputElement) => {
     this.setState({ userAddInput: inputFromTheAddInputElement })
   };
 
@@ -92,6 +99,10 @@ class App extends React.Component {
     })
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem('todoList', JSON.stringify(nextState.todoList));
+  }
+
   render() {
     return (
       <div className="app">
@@ -109,17 +120,17 @@ class App extends React.Component {
         </TodoForm>
         <h2>Search your Todo's here </h2>
         <div className="search">
-        <SearchItem
-          searchInput={this.state.userSearchInput}
-          handleSearch={(event) => this.changeSearchInput(event.target.value)}
-          searchTheElement={() => this.searchInTodoList(this.state.userSearchInput)}
-        />
-        <ul>
-        {this.state.searchList.map(val => <li
-         className="search-items">
-         {val.task}
-         </li>)}
-        </ul>
+          <SearchItem
+            searchInput={this.state.userSearchInput}
+            handleSearch={(event) => this.changeSearchInput(event.target.value)}
+            searchTheElement={() => this.searchInTodoList(this.state.userSearchInput)}
+          />
+          <ul>
+            {this.state.searchList.map(val => <li
+              className="search-items">
+              {val.task}
+            </li>)}
+          </ul>
         </div>
       </div>
     );
